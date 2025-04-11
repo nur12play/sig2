@@ -197,25 +197,31 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
     public int indexOf(Object object) {
         MyNode current = head;
         for (int i = 0; current != null; i++) {
-            if (current.data.equals(object)) {
-                return i;
+            if (object == null) {
+                if (current.data == null) return i;
+            } else {
+                if (object.equals(current.data)) return i;
             }
             current = current.next;
         }
         return -1;
     }
 
+
     @Override
     public int lastIndexOf(Object object) {
         MyNode current = tail;
         for (int i = size - 1; current != null; i--) {
-            if (current.data.equals(object)) {
-                return i;
+            if (object == null) {
+                if (current.data == null) return i;
+            } else {
+                if (object.equals(current.data)) return i;
             }
             current = current.prev;
         }
         return -1;
     }
+
 
     @Override
     public boolean exists(Object object) {

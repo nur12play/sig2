@@ -90,22 +90,28 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
     @Override
     public int indexOf(Object object) {
         for (int i = 0; i < size; i++) {
-            if (array[i].equals(object)) {
-                return i;
+            if (object == null) {
+                if (array[i] == null) return i;
+            } else {
+                if (object.equals(array[i])) return i;
             }
         }
         return -1;
     }
 
+
     @Override
     public int lastIndexOf(Object object) {
         for (int i = size - 1; i >= 0; i--) {
-            if (array[i].equals(object)) {
-                return i;
+            if (object == null) {
+                if (array[i] == null) return i;
+            } else {
+                if (object.equals(array[i])) return i;
             }
         }
         return -1;
     }
+
 
     @Override
     public boolean exists(Object object) {
