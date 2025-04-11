@@ -135,8 +135,63 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
 
     @Override
     public void sort() {
-        // Сортировка связного списка может быть сложной, но можно применить методы.
+        if (size <= 1) return;
+        head = mergeSort(head);
+        // Обновим tail
+        MyNode current = head;
+        while (current.next != null) {
+            current.next.prev = current; // обновляем prev
+            current = current.next;
+        }
+        tail = current;
     }
+
+    private MyNode mergeSort(MyNode node) {
+        if (node == null || node.next == null) return node;
+
+        MyNode middle = getMiddle(node);
+        MyNode nextToMiddle = middle.next;
+        middle.next = null; // разрываем список
+
+        MyNode left = mergeSort(node);
+        MyNode right = mergeSort(nextToMiddle);
+
+        return sortedMerge(left, right);
+    }
+
+    private MyNode sortedMerge(MyNode left, MyNode right) {
+        if (left == null) return right;
+        if (right == null) return left;
+
+        MyNode result;
+        @SuppressWarnings("unchecked")
+        Comparable<T> leftData = (Comparable<T>) left.data;
+
+        if (leftData.compareTo(right.data) <= 0) {
+            result = left;
+            result.next = sortedMerge(left.next, right);
+            if (result.next != null) result.next.prev = result;
+        } else {
+            result = right;
+            result.next = sortedMerge(left, right.next);
+            if (result.next != null) result.next.prev = result;
+        }
+        result.prev = null; // важно обнулять prev у головы
+        return result;
+    }
+
+    private MyNode getMiddle(MyNode node) {
+        if (node == null) return node;
+        MyNode slow = node;
+        MyNode fast = node;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
 
     @Override
     public int indexOf(Object object) {
@@ -215,7 +270,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private MyNode current = head;
 
             @Override
