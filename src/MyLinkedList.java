@@ -137,10 +137,9 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
     public void sort() {
         if (size <= 1) return;
         head = mergeSort(head);
-        // Обновим tail
         MyNode current = head;
         while (current.next != null) {
-            current.next.prev = current; // обновляем prev
+            current.next.prev = current;
             current = current.next;
         }
         tail = current;
@@ -151,7 +150,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
 
         MyNode middle = getMiddle(node);
         MyNode nextToMiddle = middle.next;
-        middle.next = null; // разрываем список
+        middle.next = null;
 
         MyNode left = mergeSort(node);
         MyNode right = mergeSort(nextToMiddle);
@@ -176,7 +175,7 @@ public class MyLinkedList<T> implements MyList<T>, Iterable<T> {
             result.next = sortedMerge(left, right.next);
             if (result.next != null) result.next.prev = result;
         }
-        result.prev = null; // важно обнулять prev у головы
+        result.prev = null;
         return result;
     }
 

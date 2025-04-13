@@ -7,7 +7,7 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
     private int size;
 
     public MyArrayList() {
-        array = new Object[10];  // Начальная емкость массива
+        array = new Object[10];
         size = 0;
     }
 
@@ -132,27 +132,22 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
         return size;
     }
 
-    // Метод для изменения размера массива, если его размер увеличивается
     private void resize() {
         array = Arrays.copyOf(array, array.length * 2);
     }
 
-    // Проверка индекса на корректность
     private void checkIndex(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
     }
 
-    // Проверка индекса для добавления нового элемента
     private void checkIndexForAdd(int index) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
     }
 
-    // Реализация метода isEmpty
     public boolean isEmpty() {
-        return size == 0;  // Возвращаем true, если размер коллекции равен 0
+        return size == 0;
     }
 
-    // Реализация итератора
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {

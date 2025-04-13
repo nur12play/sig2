@@ -10,7 +10,7 @@ public class MyMinHeap<T extends Comparable<T>> implements MyHeap<T> {
     @Override
     public void insert(T item) {
         heap.add(item);
-        siftUp(heap.size() - 1);  // Поднимем элемент на правильную позицию
+        siftUp(heap.size() - 1);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MyMinHeap<T extends Comparable<T>> implements MyHeap<T> {
     private void siftDown(int index) {
         int leftChildIndex, rightChildIndex, smallest;
 
-        while (index < heap.size() / 2) {  // Пока у узла есть хотя бы один дочерний
+        while (index < heap.size() / 2) {
             leftChildIndex = 2 * index + 1;
             rightChildIndex = 2 * index + 2;
             smallest = index;
