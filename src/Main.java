@@ -1,30 +1,22 @@
 public class Main {
     public static void main(String[] args) {
-        MyArrayList<Integer> arrayList = new MyArrayList<>();  // Указываем тип Integer
+        MyArrayList<Integer> arrayList = new MyArrayList<>();
+
+        System.out.println("Is ArrayList empty? " + arrayList.isEmpty());  // Должно вывести true
+
         arrayList.add(10);
         arrayList.add(20);
         arrayList.add(30);
-        arrayList.add(1, 15);  // Добавить элемент по индексу
-        arrayList.set(2, 25);  // Обновить элемент по индексу
-        arrayList.remove(3);   // Удалить элемент по индексу
 
-        System.out.println("ArrayList:");
-        for (Integer item : arrayList) {  // Указываем тип в цикле
-            System.out.println(item);
-        }
+        System.out.println("Is ArrayList empty? " + arrayList.isEmpty());  // Должно вывести false
 
-        // Тестирование MyLinkedList
-        MyLinkedList<String> linkedList = new MyLinkedList<>();  // Указываем тип String
-        linkedList.add("First");
-        linkedList.add("Second");
-        linkedList.addFirst("Zero");
-        linkedList.addLast("Last");
-        linkedList.remove(1);  // Удалить элемент по индексу
+        arrayList.remove(0);  // Удалим первый элемент
+        arrayList.remove(0);  // Удалим второй элемент
 
-        // Вывод элементов MyLinkedList
-        System.out.println("\nLinkedList:");
-        for (String item : linkedList) {  // Указываем тип в цикле
-            System.out.println(item);
-        }
+        System.out.println("Is ArrayList empty? " + arrayList.isEmpty());  // Должно вывести false
+
+        arrayList.remove(0);  // Удалим последний элемент
+
+        System.out.println("Is ArrayList empty? " + arrayList.isEmpty());  // Должно вывести true
     }
 }
